@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semih Berber - Premium Erkek Kuaförü</title>
+    <meta name="description"
+        content="Alanya'nın en iyi erkek kuaförü. Modern saç kesimi, sakal tasarımı ve bakım hizmetleri.">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Tailwind Config for v4 (if needed, but mostly handled by css import) -->
+
+    <!-- Tailwind CSS CDN (Immediate Mode) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Outfit', 'sans-serif'],
+                        'serif': ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        amber: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body
+    class="bg-zinc-950 text-zinc-100 font-['Outfit',sans-serif] antialiased selection:bg-amber-500/30 selection:text-amber-200">
+
+    <!-- Navbar -->
+    <nav class="navbar fixed top-0 w-full z-50 transition-all duration-300 glass-strong">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold font-['Playfair_Display'] tracking-wider text-white">
+                        SEMIH<span class="text-amber-500">BERBER</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8 nav-links">
+                        <a href="#anasayfa"
+                            class="text-zinc-300 hover:text-amber-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Anasayfa</a>
+                        <a href="#hizmetler"
+                            class="text-zinc-300 hover:text-amber-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Hizmetler</a>
+                        <a href="#galeri"
+                            class="text-zinc-300 hover:text-amber-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Galeri</a>
+                        <a href="#musteri-yorumlari"
+                            class="text-zinc-300 hover:text-amber-400 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                            data-i18n="nav_reviews">Yorumlar</a>
+                        <a href="#iletisim"
+                            class="bg-amber-600 hover:bg-amber-700 text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all shadow-lg shadow-amber-900/20 transform hover:-translate-y-0.5"
+                            data-i18n="nav_appointment">Randevu
+                            Al</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button"
+                        class="mobile-menu-btn inline-flex items-center justify-center p-2 rounded-md text-zinc-400 hover:text-white hover:bg-zinc-800 focus:outline-none">
+                        <span class="sr-only">Menüyü aç</span>
+                        <!-- Icon -->
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="nav-links mobile-menu hidden md:hidden glass border-t border-zinc-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-center">
+                <a href="#anasayfa"
+                    class="text-zinc-300 hover:text-amber-400 block px-3 py-2 rounded-md text-base font-medium"
+                    data-i18n="nav_home">Anasayfa</a>
+                <a href="#hizmetler"
+                    class="text-zinc-300 hover:text-amber-400 block px-3 py-2 rounded-md text-base font-medium"
+                    data-i18n="nav_services">Hizmetler</a>
+                <a href="#galeri"
+                    class="text-zinc-300 hover:text-amber-400 block px-3 py-2 rounded-md text-base font-medium"
+                    data-i18n="nav_gallery">Galeri</a>
+                <a href="#iletisim"
+                    class="text-zinc-300 hover:text-amber-400 block px-3 py-2 rounded-md text-base font-medium"
+                    data-i18n="nav_contact">İletişim</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="anasayfa" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Overlay gradient -->
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-zinc-950 z-10"></div>
+
+        <!-- Hero Background Image -->
+        <div class="hero-content absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=2074&auto=format&fit=crop"
+                alt="Barber Shop" class="w-full h-full object-cover">
+        </div>
+
+        <div class="relative z-20 text-center px-4 max-w-4xl mx-auto mt-16">
+            <span
+                class="inline-block py-1 px-3 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-sm font-semibold tracking-wider mb-6 animate-fade-in-up"
+                data-i18n="hero_badge">ALANYA'NIN
+                EN İYİSİ</span>
+            <h1 class="text-5xl md:text-7xl font-bold font-['Playfair_Display'] text-white mb-6 leading-tight drop-shadow-2xl animate-fade-in-up"
+                style="animation-delay: 100ms;" data-i18n="hero_title">
+                Tarzınız <span class="text-amber-500">İmzanızdır</span>
+            </h1>
+            <p class="text-lg md:text-xl text-zinc-300 mb-10 max-w-2xl mx-auto font-light animate-fade-in-up"
+                style="animation-delay: 200ms;" data-i18n="hero_desc">
+                Modern kesim teknikleri ve geleneksel tıraş sanatının buluştuğu nokta. Kendinizi özel hissetmek için
+                doğru adrestesiniz.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up"
+                style="animation-delay: 300ms;">
+                <a href="#iletisim"
+                    class="px-8 py-4 bg-amber-600 hover:bg-amber-700 text-white rounded-full font-bold text-lg transition-all shadow-[0_0_20px_rgba(217,119,6,0.3)] hover:shadow-[0_0_30px_rgba(217,119,6,0.5)] transform hover:-translate-y-1"
+                    data-i18n="btn_appointment">
+                    Randevu Al
+                </a>
+                <a href="#hizmetler"
+                    class="px-8 py-4 bg-zinc-800/80 hover:bg-zinc-700/80 backdrop-blur-sm text-white border border-zinc-700 rounded-full font-bold text-lg transition-all transform hover:-translate-y-1"
+                    data-i18n="btn_services">
+                    Hizmetlerimiz
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="hizmetler" class="py-24 bg-zinc-950 relative">
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-amber-500 font-semibold tracking-widest text-sm uppercase mb-2"
+                    data-i18n="section_services_tag">HİZMETLERİMİZ</h2>
+                <h3 class="text-3xl md:text-5xl font-['Playfair_Display'] font-bold text-white mb-4"
+                    data-i18n="section_services_title">Size Özel Bakım
+                </h3>
+                <div class="h-1 w-20 bg-amber-600 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div
+                    class="service-card group relative p-8 rounded-2xl bg-zinc-900 border border-zinc-800/50 hover:border-amber-500/30 transition-all duration-500 hover:bg-zinc-800/50">
+                    <div
+                        class="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-zinc-950 border border-zinc-800 rounded-full flex items-center justify-center text-2xl group-hover:scale-110 group-hover:border-amber-500/50 transition-all duration-300">
+                        ✂️
+                    </div>
+                    <h4 class="mt-8 text-xl font-bold text-white mb-3 text-center group-hover:text-amber-400 transition-colors"
+                        data-i18n="service_1_title">
+                        Saç Kesimi & Stil</h4>
+                    <p class="text-zinc-400 text-center leading-relaxed" data-i18n="service_1_desc">Yüz şeklinize ve
+                        tarzınıza en uygun modern
+                        kesimler. Yıkama ve fön dahildir.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div
+                    class="service-card group relative p-8 rounded-2xl bg-zinc-900 border border-zinc-800/50 hover:border-amber-500/30 transition-all duration-500 hover:bg-zinc-800/50">
+                    <div
+                        class="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-zinc-950 border border-zinc-800 rounded-full flex items-center justify-center text-2xl group-hover:scale-110 group-hover:border-amber-500/50 transition-all duration-300">
+                        💈
+                    </div>
+                    <h4 class="mt-8 text-xl font-bold text-white mb-3 text-center group-hover:text-amber-400 transition-colors"
+                        data-i18n="service_2_title">
+                        Sakal Tasarımı</h4>
+                    <p class="text-zinc-400 text-center leading-relaxed" data-i18n="service_2_desc">Geleneksel ustura
+                        tıraşı veya makine ile modern
+                        şekillendirme ve bakım yağları.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div
+                    class="service-card group relative p-8 rounded-2xl bg-zinc-900 border border-zinc-800/50 hover:border-amber-500/30 transition-all duration-500 hover:bg-zinc-800/50">
+                    <div
+                        class="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-zinc-950 border border-zinc-800 rounded-full flex items-center justify-center text-2xl group-hover:scale-110 group-hover:border-amber-500/50 transition-all duration-300">
+                        🧖‍♂️
+                    </div>
+                    <h4 class="mt-8 text-xl font-bold text-white mb-3 text-center group-hover:text-amber-400 transition-colors"
+                        data-i18n="service_3_title">
+                        Cilt Bakımı & Maske</h4>
+                    <p class="text-zinc-400 text-center leading-relaxed" data-i18n="service_3_desc">Siyah nokta
+                        temizliği, buhar banyosu ve kil
+                        maskesi ile taze bir görünüm.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="galeri" class="py-24 bg-zinc-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-amber-500 font-semibold tracking-widest text-sm uppercase mb-2"
+                    data-i18n="section_gallery_tag">GALERİ</h2>
+                <h3 class="text-3xl md:text-5xl font-['Playfair_Display'] font-bold text-white mb-6"
+                    data-i18n="section_gallery_title">Yaptığımız İşler
+                </h3>
+                <div class="h-1 w-20 bg-amber-600 mx-auto rounded-full mb-6"></div>
+                <p class="text-zinc-400 max-w-2xl mx-auto text-lg leading-relaxed" data-i18n="section_gallery_desc">
+                    Müşterilerimizin memnuniyeti bizim en
+                    büyük referansımızdır. İşte son çalışmalarımızdan bazıları.</p>
+            </div>
+
+            <!-- Dynamic Gallery Grid -->
+            <div id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- JS will populate this -->
+                <div class="animate-pulse bg-zinc-800 h-64 rounded-xl"></div>
+                <div class="animate-pulse bg-zinc-800 h-64 rounded-xl"></div>
+                <div class="animate-pulse bg-zinc-800 h-64 rounded-xl"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="musteri-yorumlari" class="py-24 bg-zinc-950">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-amber-500 font-semibold tracking-widest text-sm uppercase mb-16"
+                data-i18n="section_reviews_tag">MÜŞTERİ YORUMLARI</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Review 1 -->
+                <div class="testimonial-card p-8 bg-zinc-900 rounded-2xl border border-zinc-800 text-left relative">
+                    <div class="text-amber-500 text-4xl font-serif absolute top-4 left-6">"</div>
+                    <p class="text-zinc-300 italic mb-6 mt-2" data-i18n="review_1">Alanya'da gittiğim en iyi berber.
+                        Semih usta işinin ehli,
+                        ortam çok temiz ve ferah. Kesinlikle tavsiye ederim.</p>
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-500 font-bold">
+                            A</div>
+                        <div>
+                            <h5 class="text-white font-semibold">Ahmet Y.</h5>
+                            <div class="flex text-amber-500 text-xs">★★★★★</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="testimonial-card p-8 bg-zinc-900 rounded-2xl border border-zinc-800 text-left relative">
+                    <div class="text-amber-500 text-4xl font-serif absolute top-4 left-6">"</div>
+                    <p class="text-zinc-300 italic mb-6 mt-2" data-i18n="review_2">Randevu sistemi çok pratik, beklemek
+                        yok. Saç tasarımı
+                        konusunda vizyonları çok geniş. Teşekkürler!</p>
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-500 font-bold">
+                            M</div>
+                        <div>
+                            <h5 class="text-white font-semibold">Mehmet K.</h5>
+                            <div class="flex text-amber-500 text-xs">★★★★★</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="iletisim" class="py-24 bg-zinc-900 relative overflow-hidden">
+        <!-- Decoration -->
+        <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-amber-600/10 rounded-full blur-3xl pointer-events-none">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+                <!-- Contact Info -->
+                <div class="space-y-8">
+                    <div>
+                        <h2 class="text-amber-500 font-semibold tracking-widest text-sm uppercase mb-2"
+                            data-i18n="section_contact_tag">İLETİŞİM</h2>
+                        <h3 class="text-4xl md:text-5xl font-['Playfair_Display'] font-bold text-white mb-6"
+                            data-i18n="section_contact_title">Randevu
+                            Alın</h3>
+                        <p class="text-zinc-400 text-lg leading-relaxed" data-i18n="section_contact_desc">
+                            Size özel zaman ayırabilmemiz için lütfen randevu alınız. Sorularınız için bizi arayabilir
+                            veya formu doldurabilirsiniz.
+                        </p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-amber-500 flex-shrink-0">
+                                📍</div>
+                            <div>
+                                <h4 class="text-white font-semibold text-lg" data-i18n="contact_address">Adres</h4>
+                                <p class="text-zinc-400">Mahmutlar, Atatürk Cd. ali kırmızı apt, 07450 Alanya/Antalya
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-amber-500 flex-shrink-0">
+                                📞</div>
+                            <div>
+                                <h4 class="text-white font-semibold text-lg" data-i18n="contact_phone">Telefon</h4>
+                                <p class="text-zinc-400">+90 531 232 05 07</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-amber-500 flex-shrink-0">
+                                ⏰</div>
+                            <div>
+                                <h4 class="text-white font-semibold text-lg" data-i18n="contact_hours">Çalışma Saatleri
+                                </h4>
+                                <p class="text-zinc-400">Pzt - Cmt: 09:00 - 22:00</p>
+                                <p class="text-zinc-500 text-sm">Pazar: Kapalı</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <div
+                    class="bg-zinc-800/30 backdrop-blur-md p-8 md:p-10 rounded-3xl border border-zinc-700/50 shadow-2xl">
+                    <form id="contactForm" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-zinc-300 mb-2"
+                                data-i18n="form_name">Ad Soyad</label>
+                            <input type="text" id="name" required
+                                class="w-full bg-zinc-900/50 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-colors placeholder-zinc-600"
+                                placeholder="Adınız Soyadınız">
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label for="phone" class="block text-sm font-medium text-zinc-300 mb-2"
+                                    data-i18n="form_phone">Telefon</label>
+                                <input type="tel" id="phone" required
+                                    class="w-full bg-zinc-900/50 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-colors placeholder-zinc-600"
+                                    placeholder="05XX XXX XX XX">
+                            </div>
+                            <div>
+                                <label for="date" class="block text-sm font-medium text-zinc-300 mb-2"
+                                    data-i18n="form_date">Tarih</label>
+                                <input type="date" id="date" required
+                                    class="w-full bg-zinc-900/50 border border-zinc-700 rounded-lg px-4 py-3 text-zinc-300 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-colors [color-scheme:dark]">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="service" class="block text-sm font-medium text-zinc-300 mb-2"
+                                data-i18n="form_service">Hizmet
+                                Seçiniz</label>
+                            <select id="service"
+                                class="w-full bg-zinc-900/50 border border-zinc-700 rounded-lg px-4 py-3 text-zinc-300 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-colors">
+                                <option>Saç Kesimi</option>
+                                <option>Sakal Kesimi</option>
+                                <option>Saç & Sakal (Full Paket)</option>
+                                <option>Cilt Bakımı</option>
+                                <option>Çocuk Tıraşı</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-zinc-300 mb-2"
+                                data-i18n="form_note">Notunuz
+                                (Opsiyonel)</label>
+                            <textarea id="message" rows="3"
+                                class="w-full bg-zinc-900/50 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-colors placeholder-zinc-600"
+                                placeholder="Özel bir isteğiniz var mı?"></textarea>
+                        </div>
+
+                        <button type="submit"
+                            class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all transform hover:-translate-y-1"
+                            data-i18n="btn_submit">
+                            Randevu Oluştur
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 border-t border-zinc-900">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-2xl font-bold font-['Playfair_Display'] tracking-wider text-white mb-6">
+                SEMIH<span class="text-amber-500">BERBER</span>
+            </h2>
+            <div class="flex justify-center space-x-8 mb-8">
+                <a href="https://www.instagram.com/semih.anilganhairstudio/" target="_blank"
+                    class="text-zinc-500 hover:text-white transition-colors">Instagram</a>
+                <a href="#" class="text-zinc-500 hover:text-white transition-colors">Facebook</a>
+                <a href="#" class="text-zinc-500 hover:text-white transition-colors">WhatsApp</a>
+            </div>
+            <p class="text-zinc-600 text-sm">&copy; 2024 Semih Berber. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox"
+        class="fixed inset-0 z-[100] bg-black/95 hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-4">
+        <button id="lightboxClose"
+            class="absolute top-6 right-6 text-white text-4xl hover:text-amber-500 transition-colors">&times;</button>
+        <div class="relative max-w-5xl w-full h-full flex items-center justify-center">
+            <img id="lightboxImg" src="" alt="Gallery Preview"
+                class="max-h-[90vh] max-w-full object-contain rounded-lg shadow-2xl shadow-amber-900/20 transform scale-95 transition-transform duration-300">
+            <div class="absolute bottom-4 left-0 w-full text-center pb-4">
+                <h3 id="lightboxTitle" class="text-2xl font-bold text-white font-serif drop-shadow-md"></h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Maintenance Overlay -->
+    <div id="maintenanceOverlay"
+        class="fixed inset-0 z-[200] bg-zinc-950 hidden flex-col items-center justify-center text-center p-4">
+        <div class="bg-amber-500/10 p-8 rounded-full mb-8 animate-pulse">
+            <span class="text-6xl">🛠️</span>
+        </div>
+        <h1 class="text-4xl md:text-6xl font-bold font-['Playfair_Display'] text-white mb-4">Bakımdayız</h1>
+        <p class="text-zinc-400 text-lg md:text-xl max-w-lg mb-8">
+            Sizlere daha iyi hizmet verebilmek için kısa bir süreliğine bakımdayız. Anlayışınız için teşekkür ederiz.
+        </p>
+        <div class="h-1 w-24 bg-amber-600 rounded-full"></div>
+    </div>
+
+    <!-- Firebase SDK (Compat) - Keeping script order for compatibility -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+
+    <!-- Scripts -->
+    <script src="firebase-init.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yönetici Paneli - Semih Berber</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Tailwind CSS CDN (Immediate Mode) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Outfit', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-zinc-950 text-zinc-100 font-['Outfit',sans-serif] antialiased">
+
+    <!-- Login Screen -->
+    <div id="loginScreen"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-[url('https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+
+        <div
+            class="relative z-10 w-full max-w-md p-8 bg-zinc-900/90 border border-zinc-800 rounded-2xl shadow-2xl animate-fade-in-up">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-white mb-2">Admin Girişi</h1>
+                <p class="text-zinc-400">Panel erişimi için lütfen kimliğinizi doğrulayın.</p>
+            </div>
+
+            <form id="loginForm" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-zinc-300 mb-2">Kullanıcı Adı</label>
+                    <input type="text" id="username" required
+                        class="w-full bg-black/50 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none transition-colors">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-zinc-300 mb-2">Şifre</label>
+                    <input type="password" id="password" required
+                        class="w-full bg-black/50 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none transition-colors">
+                </div>
+                <button type="submit"
+                    class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-3.5 rounded-lg shadow-lg transition-transform hover:-translate-y-0.5">
+                    Giriş Yap
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard (Grid Layout) -->
+    <div id="adminDashboard" class="hidden min-h-screen lg:grid lg:grid-cols-[280px_1fr]">
+
+        <!-- Sidebar -->
+        <aside
+            class="bg-zinc-900 border-r border-zinc-800 flex flex-col h-screen fixed lg:relative w-[280px] z-40 transform -translate-x-full lg:translate-x-0 transition-transform duration-300"
+            id="sidebar">
+            <div class="h-20 flex items-center px-8 border-b border-zinc-800">
+                <h2 class="text-xl font-bold tracking-wider text-white">SEMIH<span class="text-amber-500">ADMIN</span>
+                </h2>
+            </div>
+
+            <nav class="flex-1 px-4 py-6 space-y-2">
+                <a href="#"
+                    class="nav-item active flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:text-white hover:bg-zinc-800 transition-all font-medium"
+                    data-section="dashboard">
+                    <span>📊</span> Dashboard
+                </a>
+                <a href="#"
+                    class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:text-white hover:bg-zinc-800 transition-all font-medium"
+                    data-section="appointments">
+                    <span>📅</span> Randevular
+                </a>
+                <a href="#"
+                    class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:text-white hover:bg-zinc-800 transition-all font-medium"
+                    data-section="gallery">
+                    <span>🖼️</span> Galeri
+                </a>
+                <a href="#"
+                    class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:text-white hover:bg-zinc-800 transition-all font-medium"
+                    data-section="settings">
+                    <span>⚙️</span> Ayarlar
+                </a>
+            </nav>
+
+            <div class="p-4 border-t border-zinc-800">
+                <button id="logoutBtn"
+                    class="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-red-500/10 hover:bg-red-500/20 text-red-500 rounded-lg transition-colors text-sm font-semibold">
+                    <span>🚪</span> Çıkış Yap
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col min-w-0 bg-zinc-950">
+            <!-- Topbar (Mobile Toggle & Title) -->
+            <header
+                class="h-20 bg-zinc-900/50 backdrop-blur-md border-b border-zinc-800 flex items-center justify-between px-6 lg:px-10 sticky top-0 z-30">
+                <div class="flex items-center gap-4">
+                    <button class="lg:hidden p-2 text-zinc-400 hover:text-white"
+                        onclick="document.getElementById('sidebar').classList.toggle('-translate-x-full')">
+                        ☰
+                    </button>
+                    <h2 id="pageTitle" class="text-xl font-bold text-white">Dashboard</h2>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                    <span class="text-sm text-zinc-400">Sistem Çevrimiçi</span>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="p-6 lg:p-10 flex-1 overflow-auto">
+
+                <!-- Dashboard Section -->
+                <section id="dashboardSection" class="content-section h-full active animate-fade-in space-y-8">
+                    <!-- Stats Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div
+                            class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl relative overflow-hidden group hover:border-amber-500/30 transition-colors">
+                            <div class="relative z-10">
+                                <p class="text-zinc-400 text-sm font-medium mb-1">Toplam Randevu</p>
+                                <h3 id="totalAppointments" class="text-3xl font-bold text-white">0</h3>
+                            </div>
+                            <div
+                                class="absolute right-4 top-4 text-4xl opacity-10 group-hover:opacity-20 transition-opacity">
+                                📅</div>
+                        </div>
+
+                        <div
+                            class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl relative overflow-hidden group hover:border-amber-500/30 transition-colors">
+                            <div class="relative z-10">
+                                <p class="text-zinc-400 text-sm font-medium mb-1">Bekleyen</p>
+                                <h3 id="pendingAppointments" class="text-3xl font-bold text-amber-500">0</h3>
+                            </div>
+                            <div
+                                class="absolute right-4 top-4 text-4xl opacity-10 group-hover:opacity-20 transition-opacity">
+                                ⏳</div>
+                        </div>
+
+                        <div
+                            class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl relative overflow-hidden group hover:border-amber-500/30 transition-colors">
+                            <div class="relative z-10">
+                                <p class="text-zinc-400 text-sm font-medium mb-1">Tamamlanan</p>
+                                <h3 id="completedAppointments" class="text-3xl font-bold text-green-500">0</h3>
+                            </div>
+                            <div
+                                class="absolute right-4 top-4 text-4xl opacity-10 group-hover:opacity-20 transition-opacity">
+                                ✅</div>
+                        </div>
+
+                        <div
+                            class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl relative overflow-hidden group hover:border-amber-500/30 transition-colors">
+                            <div class="relative z-10">
+                                <p class="text-zinc-400 text-sm font-medium mb-1">Galeri Görselleri</p>
+                                <h3 id="totalImages" class="text-3xl font-bold text-purple-500">0</h3>
+                            </div>
+                            <div
+                                class="absolute right-4 top-4 text-4xl opacity-10 group-hover:opacity-20 transition-opacity">
+                                🖼️</div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-6">Son Randevu Talepleri (Son 5)</h3>
+                        <div id="recentAppointments" class="space-y-4">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Appointments Section -->
+                <section id="appointmentsSection" class="content-section animate-fade-in hidden">
+                    <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 h-full flex flex-col">
+                        <!-- Filters -->
+                        <div class="flex flex-col sm:flex-row gap-4 justify-between items-center mb-6">
+                            <div class="flex gap-2 bg-zinc-950 p-1 rounded-lg border border-zinc-800">
+                                <button
+                                    class="filter-btn active px-4 py-2 rounded-md text-sm font-medium text-zinc-400 hover:text-white transition-colors"
+                                    data-filter="all">Tümü</button>
+                                <button
+                                    class="filter-btn px-4 py-2 rounded-md text-sm font-medium text-zinc-400 hover:text-white transition-colors"
+                                    data-filter="pending">Bekleyen</button>
+                                <button
+                                    class="filter-btn px-4 py-2 rounded-md text-sm font-medium text-zinc-400 hover:text-white transition-colors"
+                                    data-filter="completed">Tamamlanan</button>
+                            </div>
+                            <input type="text" id="searchAppointments" placeholder="Müşteri ara..."
+                                class="w-full sm:w-64 bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-2 text-white focus:border-amber-500 focus:outline-none text-sm">
+                        </div>
+
+                        <!-- Table Header -->
+                        <div
+                            class="grid grid-cols-12 gap-4 px-4 py-3 bg-zinc-950 border-b border-zinc-800 text-xs font-semibold text-zinc-500 uppercase tracking-wider rounded-t-lg">
+                            <div class="col-span-3">Müşteri</div>
+                            <div class="col-span-3">Hizmet</div>
+                            <div class="col-span-2">Tarih</div>
+                            <div class="col-span-2">Durum</div>
+                            <div class="col-span-2 text-right">İşlemler</div>
+                        </div>
+
+                        <!-- List Container -->
+                        <div id="appointmentsList" class="flex-1 overflow-y-auto space-y-1 py-1">
+                            <!-- Rows populated by JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Gallery Section -->
+                <section id="gallerySection" class="content-section animate-fade-in hidden">
+                    <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-lg font-bold text-white">Galeri Yönetimi</h3>
+                            <button id="addImageBtn"
+                                class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition-colors">
+                                <span>➕</span> Yeni Görsel
+                            </button>
+                        </div>
+
+                        <div id="galleryGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settingsSection" class="content-section animate-fade-in hidden">
+                    <div class="max-w-2xl mx-auto bg-zinc-900 border border-zinc-800 rounded-2xl p-8">
+                        <h3 class="text-xl font-bold text-white mb-6">Genel Ayarlar</h3>
+                        <form id="settingsForm" class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-zinc-300 mb-2">Site Başlığı</label>
+                                <input type="text" id="siteTitle" value="Semih Berber"
+                                    class="w-full bg-black/50 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:border-amber-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-zinc-300 mb-2">İletişim Telefonu</label>
+                                <input type="text" id="sitePhone" value="+90 555 123 45 67"
+                                    class="w-full bg-black/50 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:border-amber-500 focus:outline-none">
+                            </div>
+
+                            <!-- New Settings -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-zinc-800">
+                                <div>
+                                    <label class="block text-sm font-medium text-zinc-300 mb-2">Tema Seçimi</label>
+                                    <select id="siteTheme"
+                                        class="w-full bg-black/50 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:border-amber-500 focus:outline-none">
+                                        <option value="dark">Koyu Tema (Varsayılan)</option>
+                                        <option value="light">Açık Tema</option>
+                                        <option value="gold">Gold Premium</option>
+                                    </select>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between bg-black/50 border border-zinc-700 rounded-lg p-4">
+                                    <div>
+                                        <label class="block text-sm font-bold text-white mb-1">Bakım Modu</label>
+                                        <p class="text-xs text-zinc-500">Siteyi ziyaretçilere kapatır.</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" id="maintenanceMode" class="sr-only peer">
+                                        <div
+                                            class="w-11 h-6 bg-zinc-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-amber-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600">
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="pt-4 border-t border-zinc-800">
+                                <button type="submit"
+                                    class="bg-zinc-100 hover:bg-white text-black px-6 py-3 rounded-lg font-bold transition-colors">
+                                    Değişiklikleri Kaydet
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals (Appointment Details & Image Upload) -->
+    <!-- Appointment Details Modal -->
+    <div id="appointmentDetailsModal"
+        class="fixed inset-0 z-[60] flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeAppointmentDetails()"></div>
+        <div
+            class="relative bg-zinc-900 border border-zinc-700 rounded-2xl p-8 w-full max-w-lg shadow-2xl transform scale-95 transition-transform duration-300">
+            <div class="flex justify-between items-start mb-6">
+                <div>
+                    <h3 class="text-2xl font-bold text-white mb-1" id="detailName">-</h3>
+                    <p class="text-zinc-400" id="detailService">-</p>
+                </div>
+                <div id="detailStatus"></div>
+            </div>
+
+            <div class="space-y-4 mb-8">
+                <div class="flex items-center gap-3 p-3 bg-zinc-950/50 rounded-lg border border-zinc-800">
+                    <span class="text-lg">📞</span>
+                    <span class="text-zinc-300 font-medium" id="detailPhone">-</span>
+                </div>
+                <div class="flex items-center gap-3 p-3 bg-zinc-950/50 rounded-lg border border-zinc-800">
+                    <span class="text-lg">📅</span>
+                    <span class="text-zinc-300 font-medium" id="detailDate">-</span>
+                </div>
+                <div class="flex items-center gap-3 p-3 bg-zinc-950/50 rounded-lg border border-zinc-800">
+                    <span class="text-lg">⏰</span>
+                    <span class="text-zinc-500 text-sm">Talep Zamanı: <span id="detailTimestamp"
+                            class="text-zinc-400">-</span></span>
+                </div>
+                <div id="messageRow" class="p-4 bg-amber-500/10 border border-amber-500/20 rounded-lg">
+                    <h5 class="text-amber-500 text-xs font-bold uppercase tracking-wider mb-1">MÜŞTERİ NOTU</h5>
+                    <p id="detailMessage" class="text-zinc-300 text-sm italic">-</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <button
+                    class="px-4 py-3 rounded-xl font-bold bg-zinc-800 hover:bg-zinc-700 text-white transition-colors"
+                    onclick="closeAppointmentDetails()">Kapat</button>
+                <button id="detailActionBtn" class="px-4 py-3 rounded-xl font-bold transition-colors">İşlem</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Upload Modal -->
+    <div id="imageUploadModal" class="modal fixed inset-0 z-[60] flex items-center justify-center hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm modal-close"></div>
+        <div class="relative bg-zinc-900 border border-zinc-700 rounded-2xl p-8 w-full max-w-md shadow-2xl">
+            <div class="modal-header flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold text-white">Yeni Görsel Ekle</h2>
+                <button class="text-zinc-400 hover:text-white modal-close text-2xl">&times;</button>
+            </div>
+
+            <form id="imageUploadForm" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-zinc-300 mb-2">Görsel Başlığı</label>
+                    <input type="text" id="imageTitle" required
+                        class="w-full bg-zinc-950 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:border-amber-500 focus:outline-none">
+                </div>
+
+                <div class="border-2 border-dashed border-zinc-700 hover:border-amber-500 rounded-xl p-8 text-center transition-colors cursor-pointer"
+                    id="fileUploadArea">
+                    <input type="file" id="imageFile" accept="image/*" class="hidden">
+                    <div class="upload-placeholder">
+                        <div class="text-4xl mb-3">📁</div>
+                        <p class="text-zinc-400 text-sm">Görseli buraya sürükleyin veya <span
+                                class="text-amber-500">tıklayın</span></p>
+                    </div>
+                    <div id="imagePreview" class="hidden mt-4">
+                        <img id="previewImg" src="" class="max-h-48 mx-auto rounded-lg shadow-lg">
+                    </div>
+                </div>
+
+                <div class="flex gap-4 pt-4">
+                    <button type="button"
+                        class="flex-1 px-4 py-3 rounded-xl font-bold bg-zinc-800 hover:bg-zinc-700 text-white transition-colors modal-cancel">İptal</button>
+                    <button type="submit"
+                        class="flex-1 px-4 py-3 rounded-xl font-bold bg-amber-600 hover:bg-amber-700 text-white transition-colors">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase SDK (Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+
+    <!-- App Scripts -->
+    <script src="firebase-init.js"></script>
+    <script src="admin-script.js"></script>
+
+    <!-- Quick Inline Styles for Modal util -->
+    <style>
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: flex !important;
+            flex-direction: column !important;
+            opacity: 1 !important;
+        }
+
+        .modal.active {
+            display: flex !important;
+            opacity: 1 !important;
+        }
+
+        .active .transform {
+            transform: scale(1);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Table Row Styling for JS injected items */
+        .table-row {
+            display: grid;
+            grid-template-columns: repeat(12, minmax(0, 1fr));
+            gap: 1rem;
+            padding: 1rem;
+            align-items: center;
+            border-bottom: 1px solid #27272a;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .table-row:hover {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .col-span-3 {
+            grid-column: span 3 / span 3;
+        }
+
+        .col-span-2 {
+            grid-column: span 2 / span 2;
+        }
+    </style>
+</body>
+
+</html>
